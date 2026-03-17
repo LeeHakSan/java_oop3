@@ -12,21 +12,19 @@ public class ImageCopy {
         try (FileInputStream fis = new FileInputStream("abc.png");
              FileOutputStream fos = new FileOutputStream("C:/_work_java/abc2.png")) {
             //                                           절대 경로 값을 입력해 다른 위치에 파일 저장 가능
-            byte[] buffer = new byte[1024];
+//            byte[] buffer = new byte[1024];
             int bytesRead;
-            while ((bytesRead = fis.read(buffer)) != -1) {
-                fos.write(buffer, 0, bytesRead);
+            while ((bytesRead = fis.read()) != -1) {
+                fos.write(bytesRead);
             }
-
+            long end = System.currentTimeMillis();
+            System.out.println(end - start);
 
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-        long end = System.currentTimeMillis();
-        System.out.println(end - start);
 
     }
 }
