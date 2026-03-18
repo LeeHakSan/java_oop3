@@ -25,7 +25,7 @@ public class ScoreStorage {
         System.out.print("학생 수를 입력하세요 : ");
         try {
             int count = Integer.parseInt(sc.nextLine()); // 문자열 값을 int 변환
-            StringBuffer sb = new StringBuffer();
+            StringBuilder sb = new StringBuilder();
             for (int i = 0; i < count; i++) {
                 System.out.print((i+1) + "번째 학생 점수 : ");
                 // sb에 계속 append
