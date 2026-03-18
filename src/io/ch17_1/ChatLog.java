@@ -11,6 +11,7 @@ public class ChatLog {
         System.out.println("1번 대화 저장");
         System.out.println("2번 전체 로그 보기");
         System.out.println("3번 단어 검색");
+        System.out.println("4번 이름으로 검색");
         System.out.print("선택 : ");
         String choice = sc.nextLine();
         if (choice.equals("1")) {
@@ -21,11 +22,37 @@ public class ChatLog {
             System.out.print("검색할 단어 : ");
             String keyWord = sc.nextLine();
             searchChat(keyWord);
+        } else if (choice.equals("4")) {
+            System.out.print("검색할 이름 : ");
+            String name = sc.nextLine();
+            searchByName(name);
         }
 
         sc.close();
 
     } // end of main
+
+    private static void searchByName(String name) {
+        try (BufferedReader br = new BufferedReader(new FileReader("chat_log.txt"))) {
+            String line;
+            int count = 0;
+            while ((line = br.readLine()) != null) {
+                if (line.startsWith(name + ">")) {
+                    // "이름>" 으로 시작하는 줄만 필터링
+                    System.out.println(line);
+                    count++;
+                }
+            }
+            if (count == 0) {
+                System.out.println("검색된 이름이 없습니다.");
+            } else {
+                System.out.println(name + "님의 총 채팅 기록 횟수 : " + count);
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     private static void searchChat(String keyWord) {
         try (BufferedReader br = new BufferedReader(new FileReader("chat_log.txt"))) {
@@ -39,9 +66,9 @@ public class ChatLog {
                     count++;
                 }
 
-                }
+            }
             if (count == 0) {
-                    System.out.println(keyWord + "가 포함된 단어가 없습니다");
+                System.out.println(keyWord + "가 포함된 단어가 없습니다");
             } else {
                 System.out.println("\n총 " + count + "개의 대화내용이 발견 됐습니다.");
             }
