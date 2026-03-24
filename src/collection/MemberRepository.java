@@ -94,6 +94,7 @@ public class MemberRepository {
         return memberList.size();
     }
 
+    // 도전 문제 1번
     public List<Member> findByAgeRange(int minAge, int maxAge) {
         List<Member> result = new ArrayList<>();
         for (Member member : memberList) {
@@ -110,13 +111,26 @@ public class MemberRepository {
             if (member.getEmail().equals(email)) {
                 result.add(member);
             }
-
         }
-        if (result.isEmpty()){
+
+        if (result.isEmpty()) {
             return null;
         }
 
         return result;
     }
+
+//    public Member findByEmail(String email) {
+//        if (emailSet.contains(email) == false) {
+//            return null;
+//        }
+//        for (Member member : memberList) {
+//            if (member.getEmail().equals(email)) {
+//                return member;
+//            }
+//        }
+//        return null;
+//
+//    }
 
 }
